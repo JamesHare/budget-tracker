@@ -1,14 +1,10 @@
 package com.jameshare.budgettracker.service;
 
-import com.jameshare.budgettracker.model.Category;
 import com.jameshare.budgettracker.model.Transaction;
 import com.jameshare.budgettracker.model.repo.TransactionRepository;
 import org.springframework.stereotype.Service;
 
-import java.util.Calendar;
-import java.util.Date;
-import java.util.GregorianCalendar;
-import java.util.List;
+import java.util.*;
 
 @Service
 public class TransactionServiceImpl implements TransactionService {
@@ -33,4 +29,16 @@ public class TransactionServiceImpl implements TransactionService {
     public List<Transaction> findAllByCategory(final String category) {
         return repository.findAllByCategoryCategory(category);
     }
+
+    @Override
+    public Optional<Transaction> findTransaction(long id) {
+        return repository.findById(id);
+    }
+
+    @Override
+    public void AddUpdateTransaction(final Transaction transaction) {
+        repository.save(transaction);
+    }
+
+
 }
