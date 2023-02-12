@@ -1,0 +1,61 @@
+spring:
+  application:
+    name: '@project.name@'
+  datasource:
+    url: ${DB_URL}
+    username: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
+    hikari:
+      connectionTimeout: 30000
+      idleTimeout: 600000
+      maxLifetime: 1800000
+  jpa:
+    hibernate:
+      use-new-id-generator-mappings: false
+      ddl-auto: none
+    properties:
+      hibernate:
+        default_schema: budgettracker
+    generate-ddl: true
+    show-sql: false
+    database: mysql
+  liquibase:
+    default-schema: budgettracker
+    change-log: classpath:/db/changelog/db.changelog-main.yml
+    enabled: true
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+logging:
+  level:
+    com:
+      jameshare:
+        budgettracker: DEBUG
+budget-tracker:
+  config:
+    categories:
+      - UNCATEGORIZED
+      - IGNORE
+      - HOUSING
+      - TRANSPORTATION
+      - GROCERIES
+      - DINING
+      - UTILITIES
+      - INSURANCE
+      - HEALTHCARE
+      - SAVINGS
+      - ENTERTAINMENT
+      - PERSONAL_SPENDING
+      - MISCELLANEOUS
+---
+spring:
+  config:
+    activate:
+      on-profile: dev
+server:
+  port: 8080
+DB_URL: "jdbc:mysql://localhost:3306/budgettracker"
+DB_USERNAME: budgettracker
+DB_PASSWORD: budgettracker1
